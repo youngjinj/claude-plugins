@@ -123,6 +123,18 @@ def highlight(code: str, lang: str) -> str:
     return "\n".join(out)
 
 
+_SAFE_URL_SCHEME = re.compile(r"^(https?|mailto):", re.I)
+
+
+def _safe_link(m):
+    """Drop the anchor (keep the visible text) for any scheme but http(s)/mailto/relative --
+    an unchecked scheme here (javascript:, data:, vbscript:) executes on click."""
+    label, url = m.group(1), m.group(2)
+    if re.match(r"^\w[\w+.-]*:", url) and not _SAFE_URL_SCHEME.match(url):
+        return label
+    return '<a href="%s">%s</a>' % (url, label)
+
+
 def inline(text: str) -> str:
     """Inline markdown -> HTML. Code spans are protected from further substitution."""
     spans = []
@@ -136,7 +148,7 @@ def inline(text: str) -> str:
     # local .md links point at the generated sibling .html
     text = re.sub(r"\[([^\]]+)\]\((?!\w+:)([^)#]+)\.md(#[^)]*)?\)",
                   r'<a href="\2.html\3">\1</a>', text)
-    text = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", r'<a href="\2">\1</a>', text)
+    text = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", _safe_link, text)
     text = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", text)
     text = re.sub(r"(?<![\w*])\*([^*\n]+)\*(?![\w*])", r"<em>\1</em>", text)
     return re.sub(r"\x00(\d+)\x00", lambda m: spans[int(m.group(1))], text)
