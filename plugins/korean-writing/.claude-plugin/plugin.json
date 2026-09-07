@@ -1,0 +1,14 @@
+{
+  "name": "korean-writing",
+  "displayName": "한글 문서 작성",
+  "version": "1.0.0",
+  "description": "한글 데이터 분석 문서·보고서 검토 스킬 모음",
+  "author": {
+    "name": "Youngjin Jeong",
+    "url": "https://github.com/youngjinj"
+  },
+  "homepage": "https://github.com/youngjinj/claude-plugins",
+  "repository": "https://github.com/youngjinj/claude-plugins",
+  "license": "MIT",
+  "keywords": ["korean", "writing", "review"]
+}

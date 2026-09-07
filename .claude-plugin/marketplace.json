@@ -1,0 +1,26 @@
+{
+  "name": "youngjinj",
+  "owner": {
+    "name": "Youngjin Jeong",
+    "url": "https://github.com/youngjinj"
+  },
+  "metadata": {
+    "description": "Youngjin Jeong의 개인 Claude Code 플러그인 마켓플레이스"
+  },
+  "plugins": [
+    {
+      "name": "korean-writing",
+      "source": "./plugins/korean-writing",
+      "description": "한글 데이터 분석 문서·보고서를 수치 정합성, 논리 구조, 용어 일관성, 재현성 층위에서 검토한다.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Youngjin Jeong"
+      },
+      "homepage": "https://github.com/youngjinj/claude-plugins",
+      "repository": "https://github.com/youngjinj/claude-plugins",
+      "license": "MIT",
+      "category": "productivity",
+      "keywords": ["korean", "writing", "review", "report", "analysis"]
+    }
+  ]
+}

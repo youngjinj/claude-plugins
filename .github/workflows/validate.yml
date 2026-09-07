@@ -1,0 +1,35 @@
+name: validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: JSON 문법 검사
+        run: |
+          for f in $(find . -name '*.json' -not -path './node_modules/*'); do
+            python3 -c "import json,sys; json.load(open(sys.argv[1]))" "$f" || exit 1
+            echo "ok  $f"
+          done
+
+      - name: SKILL.md 프론트매터 검사
+        run: |
+          fail=0
+          for f in $(find plugins -name SKILL.md); do
+            head -1 "$f" | grep -qx -- '---' || { echo "no frontmatter: $f"; fail=1; continue; }
+            grep -qm1 '^name:' "$f"        || { echo "missing name: $f"; fail=1; }
+            grep -qm1 '^description:' "$f" || { echo "missing description: $f"; fail=1; }
+            echo "ok  $f"
+          done
+          exit $fail
+
+      - name: Claude Code 마켓플레이스 검증
+        run: |
+          npm install -g @anthropic-ai/claude-code
+          claude plugin validate .
