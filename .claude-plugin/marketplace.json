@@ -40,7 +40,7 @@
       "name": "doc-quality",
       "source": "./plugins/doc-quality",
       "description": "프로젝트에 무관하게 쓰는 범용 글쓰기 품질 스킬 — 필요한 내용만 남기는 토론식 검토, 짧고 일관된 주석·분석 문서 작성, md-to-html 변환",
-      "version": "1.1.0",
+      "version": "1.0.1",
       "author": {
         "name": "Youngjin Joo"
       },
