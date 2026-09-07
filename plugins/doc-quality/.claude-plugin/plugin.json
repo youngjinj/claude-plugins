@@ -1,0 +1,14 @@
+{
+  "name": "doc-quality",
+  "displayName": "문서 품질 도구",
+  "version": "1.0.0",
+  "description": "프로젝트에 무관하게 쓰는 범용 글쓰기 품질 스킬 — 필요한 내용만 남기는 토론식 검토, 짧고 일관된 주석·분석 문서 작성, md-to-html 변환",
+  "author": {
+    "name": "Youngjin Joo",
+    "url": "https://github.com/youngjinj"
+  },
+  "homepage": "https://github.com/youngjinj/claude-plugins",
+  "repository": "https://github.com/youngjinj/claude-plugins",
+  "license": "MIT",
+  "keywords": ["writing", "review", "documentation", "markdown"]
+}
