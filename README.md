@@ -17,7 +17,7 @@ claude plugin install korean-writing@youngjinj
 | 플러그인 | 스킬 | 설명 |
 |---|---|---|
 | `korean-writing` | `korean-analysis-doc` | 한글 데이터 분석 문서를 수치 정합성·논리 구조·용어 일관성·재현성 층위에서 검토 |
-| `cubrid-dev-docs` | `build-cubrid`, `cubrid-doc`, `issue-docs`, `jira-create-error`, `jira-create-imprv`, `jira-final-check`, `pr-review-major` | CUBRID 소스 빌드, JIRA 이슈/PR 문서 작성과 최종 점검, 기술문서 정리 |
+| `cubrid-dev-docs` | `build-cubrid`, `code-review-deck`, `code-review-walkthrough`, `cubrid-doc`, `git-create-pr`, `issue-docs`, `jira-create-error`, `jira-create-imprv`, `jira-final-check`, `pr-review-major` | CUBRID 소스 빌드, JIRA 이슈/PR 문서 작성과 최종 점검, PR 리뷰 자료(워크스루·발표 덱) 작성, 기술문서 정리 |
 | `doc-quality` | `debate-cuts`, `tight-comments`, `md2html` | 필요한 내용만 남기는 토론식 검토, 짧고 일관된 주석·분석 문서 작성, md-to-html 변환 (프로젝트 무관 범용) |
 
 ## 구조

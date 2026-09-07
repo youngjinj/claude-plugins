@@ -1,8 +1,8 @@
 {
   "name": "cubrid-dev-docs",
   "displayName": "CUBRID 개발·문서 워크플로",
-  "version": "1.0.1",
-  "description": "CUBRID 소스 빌드, JIRA 이슈/PR 문서 작성과 최종 점검, 기술문서 정리 스킬 모음",
+  "version": "1.1.0",
+  "description": "CUBRID 소스 빌드, JIRA 이슈/PR 문서 작성과 최종 점검, PR 리뷰 자료(워크스루·발표 덱) 작성, 기술문서 정리 스킬 모음",
   "author": {
     "name": "Youngjin Joo",
     "url": "https://github.com/youngjinj"
@@ -10,5 +10,5 @@
   "homepage": "https://github.com/youngjinj/claude-plugins",
   "repository": "https://github.com/youngjinj/claude-plugins",
   "license": "MIT",
-  "keywords": ["cubrid", "jira", "build", "documentation", "pr-review"]
+  "keywords": ["cubrid", "jira", "build", "documentation", "pr-review", "code-review"]
 }
