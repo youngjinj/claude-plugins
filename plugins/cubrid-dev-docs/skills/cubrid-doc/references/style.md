@@ -11,7 +11,7 @@
 | 규칙 | 원문 | 한국어 적용 |
 |---|---|---|
 | 능동태 | `Use active voice: make clear who's performing the action.` | 동작의 주체를 문장 앞에 둔다 |
-| 예고 금지 | `Don't pre-announce anything in documentation.` | `이 절에서는 ~를 다룬다` 를 쓰지 않는다. 절의 내용이 그 일을 한다 |
+| 예고 금지 | `Don't pre-announce anything in documentation.` | `이 절에서는 ~를 다룬다` 를 쓰지 않는다. 절의 내용이 그 일을 한다. 주장을 먼저 요약하고 근거를 하위 절에서 펴는 것은 예고가 아니다 |
 | 순서 있는 목록 | `Use numbered lists for sequences.` | 절차와 순서에는 번호를 붙인다 |
 | 순서 없는 목록 | `Use bulleted lists for most other lists.` | 나머지 나열은 불릿으로 |
 | 짝을 이루는 자료 | `Use description lists for pairs of related pieces of data.` | 용어와 뜻, 파라미터와 설명은 두 열 표로 |

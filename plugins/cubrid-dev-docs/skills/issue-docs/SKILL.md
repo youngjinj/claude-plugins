@@ -1,6 +1,6 @@
 ---
 name: issue-docs
-description: Build the document set for a CUBRID issue -- cbrd-#####_issue.md (MD + JIRA wiki), _design_*.md, _test_*.md, _pr.md, _deferred_*.md, _testcases/. Use when preparing work for JIRA/PR, splitting a change into issues, or reviewing an existing issue document set. Carries the conventions and the mistakes already made once.
+description: Build the document set for a CUBRID issue -- cbrd-#####_issue.md, cbrd-#####_issue.jira, _design_*.md, _test_*.md, _pr.md, _deferred_*.md, _testcases/. Use when preparing work for JIRA/PR, splitting a change into issues, or reviewing an existing issue document set. Carries the conventions and the mistakes already made once.
 argument-hint: <topic or CBRD-#####>
 ---
 
@@ -15,8 +15,8 @@ argument-hint: <topic or CBRD-#####>
 건드리는 모든 작업이 그렇다 -- 새로 쓰는 것과 이미 있는 것을 다듬는 것에 같은 규칙을 쓴다.
 
 **"줄바꿈만 고쳐줘", "이 문장만 다듬어줘" 처럼 범위가 좁아도 마찬가지다.** 좁은 요청이
-규칙을 면제하지 않는다. 한 줄을 고치면서 두 절반의 문장 짝이나 JIRA 문법을 깨뜨리는 일이
-실제로 생긴다.
+규칙을 면제하지 않는다. 한 줄을 고치면서 `_issue.md` 와 `_issue.jira` 의 문장 짝이나 JIRA
+문법을 깨뜨리는 일이 실제로 생긴다.
 
 $ARGUMENTS
 
@@ -104,8 +104,8 @@ JIRA 첨부와 PR 본문은 올리는 순간 남이 읽고, 올린 뒤에 고쳐
 
 **본문도 ASCII 와 한글만 쓴다.** 다이어그램만의 규칙이 아니다. 폭이 모호한 문자(`--` 대신
 em dash, `/` 대신 가운뎃점, `^2` 대신 위첨자, `->` 대신 화살표)는 동아시아 환경에서 두 칸으로
-그려져 **표의 열이 어긋난다.** JIRA 절반은 어차피 ASCII 로 쓰게 되므로, 본문도 같이 맞춰야
-두 절반이 어긋나지 않는다.
+그려져 **표의 열이 어긋난다.** `_issue.jira` 는 어차피 ASCII 로 쓰게 되므로, `_issue.md` 도
+같이 맞춰야 두 파일이 어긋나지 않는다.
 
 | 쓰지 않는다 | 대신 |
 |---|---|
@@ -120,7 +120,8 @@ em dash, `/` 대신 가운뎃점, `^2` 대신 위첨자, `->` 대신 화살표)�
 
 ```
 <analysis-dir>/issues/cbrd-#####_<topic>/
-  cbrd-#####_issue.md                   JIRA 본문. design 의 축약 (MD 리뷰용 + JIRA wiki)
+  cbrd-#####_issue.md                   JIRA 본문의 리뷰용 Markdown. design 의 축약
+  cbrd-#####_issue.jira                 JIRA 붙여넣기용. `_issue.md` 와 같은 내용을 JIRA wiki 로
   cbrd-#####_pr.md                      GitHub PR 본문. issue 의 축약
   cbrd-#####_design_YYYYMMDD_HHMM.md    JIRA 첨부. 이 이슈의 상세 전부
   cbrd-#####_test_YYYYMMDD_HHMM.md      JIRA 첨부. TC 를 어떤 범위로 설계할지
@@ -319,31 +320,48 @@ build 짝을 적어 두면 낡지 않는다 -- 그 짝은 역사적 사실이라
 수치는 시점을 적어도 인용할 수 있는 증거가 되지 않는다. 그때는 수치를 빼고 **재지 못했다는
 것과 무엇이 있어야 재는지** 를 적는다.
 
-## 3. issue.md 의 이중 구조
+## 3. issue 는 두 파일이다
+
+같은 내용을 두 벌로 쓴다. `_issue.md` 는 리뷰용 Markdown 이고 `_issue.jira` 는 JIRA 에
+붙여넣는 wiki 문법이다. **한 파일 안에 두 벌을 넣지 않는다** -- 한쪽 문법 검사를 돌릴 때마다
+다른 쪽이 전부 걸리고, 편집기에서 어느 벌을 보고 있는지 헷갈린다.
+
+`_issue.md` 는 이렇다.
 
 ```markdown
 # <영문 제목 -- PR 제목과 같은 문자열>
 
-> 상단 Markdown(리뷰용) / 하단 JIRA wiki(붙여넣기용). MD 수정 시 JIRA 블록도 함께 반영.
-> 배경과 설계 근거는 `design_*.md`, 검증 방법은 `test_*.md` 와 `tc/` 참고.
-> JIRA [CBRD-#####](...) / 브랜치 `CBRD-#####` / 첨부는 위 두 파일.
+> JIRA [CBRD-#####](...) / 브랜치 `CBRD-#####` / 배경과 설계 근거는 `design_*.md`, 검증 방법은 `test_*.md` 와 `tc/` 가 갖고 둘을 첨부한다.
 
 ---
 
 ## Description / Specification Changes / Implementation / Acceptance Criteria (A/C) / Definition of done (DoD)
+```
 
----
+`_issue.jira` 는 이렇다. 파일 맨 위 세 줄은 붙여넣는 사람을 위한 안내이고 JIRA 에 넣지 않는다.
 
-```(JIRA wiki 블록)
+```text
+이 파일은 JIRA 7 자체 호스팅 문법으로만 적는다. Markdown 문법을 쓰지 않는다.
+가로줄 위 마지막 줄이 제목이고 Summary 필드에 넣는다. 가로줄 아래가 본문이고 Description 필드에 붙여넣는다.
+본문은 h2. *Description* 으로 시작하지 않는다. 그 필드 제목과 겹친다.
+
+<영문 제목 -- _issue.md 의 H1 과 같은 문자열>
+
+----
+
+<본문>
 ```
 
 제목은 `git-create-pr` 의 PR 제목과 같은 문자열로 맞추되, **`[CBRD-#####]` 접두사는
-GitHub 제목 필드에만 붙인다.** 파일의 H1 과 JIRA 제목은 접두사 없는 본문이다.
+GitHub 제목 필드에만 붙인다.** `_issue.md` 의 H1 과 `_issue.jira` 의 제목 줄은 접두사 없는
+본문이다.
 
-머리말은 `---` **위** 에 둔다. JIRA 블록 밖이라 이슈 본문에 들어가지 않으므로,
-파일 경로/브랜치명 같은 내부 정보를 여기에 쓴다.
+`_issue.md` 의 머리말은 `---` **위** 에 둔다. JIRA 에 옮기지 않는 자리이므로 파일
+경로와 브랜치명 같은 내부 정보를 여기에 쓴다.
 
-**두 벌을 함께 고친다.** MD 만 고치고 JIRA 블록을 두면 다음에 붙여넣을 때 옛 내용이 올라간다.
+**두 파일을 함께 고친다.** `_issue.md` 만 고치고 `_issue.jira` 를 두면 다음에 붙여넣을 때
+옛 내용이 올라간다. 아직 `_issue.jira` 를 만들지 않았으면 `_issue.md` 가 확정된 뒤에 한
+번에 옮긴다 -- MD 가 흔들리는 동안 두 벌을 따라 고치면 줄 구조가 어긋난다.
 
 JIRA wiki 주의. **아래는 CUBRID JIRA 인스턴스에서 실제로 깨지는 것을 보고 적은 것이다** --
 Atlassian 문서의 일반 규칙이 아니고, renderer 버전과 붙여넣기 경로에 따라 달라질 수 있다.
@@ -369,11 +387,11 @@ Atlassian 문서의 일반 규칙이 아니고, renderer 버전과 붙여넣기 
 - 같은 층의 소제목은 **채번 여부를 통일한다.** `*설계 핵심*` 처럼 번호 없는 것과
   `*1) 대상*` 처럼 번호 있는 것을 섞으면 층이 어긋나 보인다
 
-**두 절반 다 접지 않는다.** 문단 하나가 한 줄이다. JIRA 는 **단일 개행이 `<br>` 로
+**두 파일 다 접지 않는다.** 문단 하나가 한 줄이다. JIRA 는 **단일 개행이 `<br>` 로
 렌더링되므로** 폭을 맞춰 접으면 그 자리가 렌더링에 강제 줄바꿈으로 들어간다. 줄을 바꾸는
 자리는 뜻이 있는 자리뿐이다 -- 문단 경계, 열거 항목, 표 행, 코드 블록 안.
 
-**그래서 두 절반의 줄 구조가 같다.** 대조는 **줄 단위** 로 한다 -- 절 제목, 열거 항목의
+**그래서 두 파일의 줄 구조가 같다.** 대조는 **줄 단위** 로 한다 -- 절 제목, 열거 항목의
 개수, 표 행이 양쪽에서 맞는지 센다.
 
 ## 4. 쪼개기
@@ -448,8 +466,8 @@ Atlassian 문서의 일반 규칙이 아니고, renderer 버전과 붙여넣기 
 것** 으로 나타나므로, 바뀐 코드가 같은 결과를 내는지가 먼저다. 성능 절은 그 이슈의 목적
 자체를 확인해야 할 때만 두고 뒤에 붙인다.
 
-**같은 층의 산출물 md 이름을 쓰지 않는다.** `..._design_*.md`, `..._test_*.md`,
-`..._issue.md` 처럼 이 묶음의 다른 문서를 서로 가리키지 않는다. 각 문서는 혼자 읽혀야
+**같은 층의 산출물 문서 이름을 쓰지 않는다.** `..._design_*.md`, `..._test_*.md`,
+`..._issue.md`, `..._issue.jira` 처럼 이 묶음의 다른 문서를 서로 가리키지 않는다. 각 문서는 혼자 읽혀야
 하는데, 서로를 가리키면 하나만 받은 사람이 읽을 수 없다. 문서 이름은 시각이 붙어 자주
 바뀌므로 가리킨 쪽이 먼저 낡는다.
 
@@ -554,7 +572,7 @@ B 를 재는 데 필요했던 배경 분석까지 함께 옮긴다.
 
 | 증상 | 고치는 법 |
 |---|---|
-| 하드랩 | 두 절반 다 접지 않는다. 문단 하나가 한 줄 |
+| 하드랩 | 두 파일 다 접지 않는다. 문단 하나가 한 줄 |
 | 비유어 | `tight-comments` 6절 표 |
 | 검증 안 한 것을 단정 | 근거의 출처를 쓴다 -- "근거는 코드 읽기다. 실제로 태워 본 측정은 없다" |
 | 같은 낱말이 두 대상을 가리킴 | 수식어를 붙여 가른다. 앞에서 붙였으면 뒤에서도 붙인다 |
@@ -620,8 +638,8 @@ B 를 재는 데 필요했던 배경 분석까지 함께 옮긴다.
 
 10. 한글과 ASCII 가 아닌 문자가 있는지 센다
 11. 코드 블록에 언어 지정이 있는지, 한글 뒤에 정렬할 열이 오는지 본다
-12. 두 절반이 하드랩돼 있는지 본다
-13. MD 절반과 JIRA 절반을 **절 단위로 대조한다.** 첫 절의
+12. `_issue.md` 와 `_issue.jira` 가 하드랩돼 있는지 본다
+13. `_issue.md` 와 `_issue.jira` 를 **절 단위로 대조한다.** 첫 절의
     `h2. *Description*` 은 JIRA 필드 제목과 겹쳐 생략하는 것이 정상이고, 나머지 절 제목은
     양쪽에 다 있어야 한다. **줄 구조는 양쪽이 같다** -- 열거 항목의 개수와 표 행을 세어
     맞는지 본다
@@ -631,11 +649,11 @@ B 를 재는 데 필요했던 배경 분석까지 함께 옮긴다.
     6절의 경계로 판정한다 -- 케이스와 스크립트 이름은 남아 있어도 된다
 16. `pr` 의 `Remarks` 를 코드 주석과 대조한다. 주석에 이미 있는 것은 뺀다
 17. 목록 항목 사이에 빈 줄이 섞여 있는지 본다. 한 문서 안에서 같아야 한다
-18. JIRA 절반은 아래 마무리 점검을 돌린다. 눈으로는 안 보인다
+18. `_issue.jira` 는 아래 마무리 점검을 돌린다. 눈으로는 안 보인다
 
-### JIRA 절반 마무리 점검 -- 세 가지만 기계로 훑는다
+### _issue.jira 마무리 점검 -- 세 가지만 기계로 훑는다
 
-`issue.md` 의 JIRA 절반은 **붙여넣기 전에 이 점검을 돌린다.** 깨진 문법은 MD 로 읽으면
+`_issue.jira` 는 **붙여넣기 전에 이 점검을 돌린다.** 깨진 문법은 MD 로 읽으면
 정상으로 보이고 JIRA 에 올린 뒤에야 드러난다.
 
 **이것은 JIRA 문법 검사기가 아니다.** 3절이 든 함정 가운데 기계로 셀 수 있는 셋만 본다 --
@@ -644,7 +662,7 @@ B 를 재는 데 필요했던 배경 분석까지 함께 옮긴다.
 확인한다.**
 
 ```sh
-python3 - <<'EOF' cbrd-#####_issue.md
+python3 - <<'EOF' cbrd-#####_issue.jira
 import re, sys
 
 # JIRA 는 `*` 를 목록 기호로도 쓰므로 줄 앞의 기호를 먼저 뗀다.
@@ -683,7 +701,7 @@ print (f'걸린 자리: {hits}')
 EOF
 ```
 
-**JIRA 절반만 넣는다.** MD 절반은 `**bold**` 를 정상으로 쓰므로 함께 넣으면 전부 걸린다.
+**`_issue.jira` 만 넣는다.** `_issue.md` 는 `**bold**` 를 정상으로 쓰므로 함께 넣으면 전부 걸린다.
 
 **출력이 비어야 넘긴다.** 걸린 자리는 굵게 할 범위를 어절 끝까지 넓히거나 문장을 나눠 고친다.
 
